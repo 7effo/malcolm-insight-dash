@@ -7,8 +7,9 @@ import {
   Activity, 
   Network, 
   Eye, 
-  Zap,
-  Users,
+  FileText,
+  Database,
+  Search,
   Globe,
   Clock,
   TrendingUp
@@ -22,35 +23,35 @@ import { RecentEvents } from "./RecentEvents";
 export const Dashboard = () => {
   const metrics = [
     {
-      title: "Active Threats",
-      value: "23",
-      change: "+5",
+      title: "PCAP Files",
+      value: "1,247",
+      change: "+23",
       trend: "up" as const,
+      icon: FileText,
+      color: "info" as const
+    },
+    {
+      title: "Suricata Alerts",
+      value: "89",
+      change: "+12",
+      trend: "up" as const, 
       icon: AlertTriangle,
       color: "critical" as const
     },
     {
-      title: "Network Flows",
-      value: "15.2k",
-      change: "+12%",
-      trend: "up" as const, 
-      icon: Network,
-      color: "info" as const
-    },
-    {
-      title: "Monitored Assets",
-      value: "1,247",
-      change: "+3",
+      title: "Zeek Logs",
+      value: "2.4M",
+      change: "+18%",
       trend: "up" as const,
-      icon: Shield,
+      icon: Database,
       color: "success" as const
     },
     {
-      title: "Events/sec",
-      value: "847",
-      change: "-2%",
-      trend: "down" as const,
-      icon: Activity,
+      title: "Arkime Sessions",
+      value: "156K",
+      change: "+7%",
+      trend: "up" as const,
+      icon: Eye,
       color: "warning" as const
     }
   ];
@@ -60,8 +61,8 @@ export const Dashboard = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Malcolm Dashboard</h1>
-          <p className="text-muted-foreground">Network Security Monitoring</p>
+          <h1 className="text-3xl font-bold text-foreground">Malcolm Network Analysis Suite</h1>
+          <p className="text-muted-foreground">PCAP • Zeek • Suricata • OpenSearch • Arkime</p>
         </div>
         <div className="flex items-center gap-4">
           <Badge variant="outline" className="border-success text-success">
@@ -69,8 +70,8 @@ export const Dashboard = () => {
             System Online
           </Badge>
           <Button variant="outline" size="sm">
-            <Eye className="w-4 h-4 mr-2" />
-            Live View
+            <Search className="w-4 h-4 mr-2" />
+            OpenSearch
           </Button>
         </div>
       </div>
@@ -102,15 +103,15 @@ export const Dashboard = () => {
         <Card className="border-border bg-card">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Globe className="w-5 h-5 text-info" />
-              Geographic Distribution
+              <Network className="w-5 h-5 text-info" />
+              Protocol Distribution
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {["United States", "Germany", "China", "Russia", "Brazil"].map((country, index) => (
-                <div key={country} className="flex items-center justify-between">
-                  <span className="text-foreground">{country}</span>
+              {["HTTP/HTTPS", "DNS", "SSH", "FTP", "SMTP"].map((protocol, index) => (
+                <div key={protocol} className="flex items-center justify-between">
+                  <span className="text-foreground">{protocol}</span>
                   <div className="flex items-center gap-2">
                     <div className="w-24 h-2 bg-muted rounded-full">
                       <div 
@@ -131,27 +132,27 @@ export const Dashboard = () => {
         <Card className="border-border bg-card">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-success" />
-              Performance Metrics
+              <Database className="w-5 h-5 text-success" />
+              Malcolm Components
             </CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-foreground">CPU Usage</span>
-                <span className="text-warning">67%</span>
+                <span className="text-foreground">OpenSearch</span>
+                <span className="text-success">Running</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-foreground">Memory Usage</span>
-                <span className="text-info">45%</span>
+                <span className="text-foreground">Arkime</span>
+                <span className="text-success">Running</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-foreground">Disk I/O</span>
-                <span className="text-success">23%</span>
+                <span className="text-foreground">Zeek Parser</span>
+                <span className="text-success">Active</span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-foreground">Network Latency</span>
-                <span className="text-success">12ms</span>
+                <span className="text-foreground">Suricata Engine</span>
+                <span className="text-warning">Updating</span>
               </div>
             </div>
           </CardContent>

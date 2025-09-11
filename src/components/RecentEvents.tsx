@@ -7,43 +7,43 @@ export const RecentEvents = () => {
     {
       id: 1,
       timestamp: "14:23:15",
-      source: "Suricata",
-      event: "HTTP anomaly detected",
-      severity: "medium"
+      source: "PCAP Upload",
+      event: "network_traffic_2024.pcap processed (247MB)",
+      severity: "success"
     },
     {
       id: 2,
       timestamp: "14:22:45",
-      source: "Zeek",
-      event: "DNS tunneling attempt",
-      severity: "high"
+      source: "Zeek Parser",
+      event: "conn.log: 15,420 connections analyzed",
+      severity: "info"
     },
     {
       id: 3,
       timestamp: "14:21:33",
-      source: "Malcolm",
-      event: "New asset discovered",
+      source: "OpenSearch",
+      event: "Index malcolm-logstash-2024.01.11 created",
       severity: "info"
     },
     {
       id: 4,
       timestamp: "14:20:12",
       source: "Suricata",
-      event: "TLS certificate validation failed",
-      severity: "warning"
+      event: "Rules updated: 25,847 signatures loaded",
+      severity: "success"
     },
     {
       id: 5,
       timestamp: "14:19:45",
-      source: "Zeek",
-      event: "File extraction completed",
+      source: "Arkime",
+      event: "Session indexing: 8,932 sessions processed",
       severity: "info"
     },
     {
       id: 6,
       timestamp: "14:18:20",
-      source: "Malcolm", 
-      event: "Automated IOC check passed",
+      source: "Filebeat", 
+      event: "Log forwarding active: 127 events/sec",
       severity: "success"
     }
   ];
@@ -64,7 +64,7 @@ export const RecentEvents = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Activity className="w-5 h-5 text-success" />
-          Recent Events
+          Processing Events
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-2">

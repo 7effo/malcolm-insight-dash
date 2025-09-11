@@ -6,39 +6,39 @@ export const ThreatFeed = () => {
   const threats = [
     {
       id: 1,
-      type: "IOC",
-      indicator: "malicious-domain.com",
+      type: "DNS",
+      indicator: "suspicious-domain.malware.net",
       severity: "high",
-      source: "ThreatIntel",
+      source: "dns.log",
       time: "3m ago",
-      description: "Known C&C domain"
+      description: "Domain resolved by multiple hosts"
     },
     {
       id: 2,
-      type: "IP",
-      indicator: "203.0.113.45",
-      severity: "critical", 
-      source: "Suricata",
+      type: "HTTP",
+      indicator: "POST /api/data",
+      severity: "medium", 
+      source: "http.log",
       time: "7m ago",
-      description: "Botnet communication"
+      description: "Unusual data exfiltration pattern"
     },
     {
       id: 3,
-      type: "Hash",
-      indicator: "a1b2c3d4...",
+      type: "TLS",
+      indicator: "Self-signed cert CN=*.evil.com",
       severity: "medium",
-      source: "Zeek",
+      source: "ssl.log",
       time: "12m ago",
-      description: "Suspicious file hash"
+      description: "Suspicious certificate detected"
     },
     {
       id: 4,
-      type: "URL",
-      indicator: "hxxp://evil.site/payload",
-      severity: "high",
-      source: "Intel Feed",
+      type: "Files",
+      indicator: "malware.exe (SHA256: a1b2c3...)",
+      severity: "critical",
+      source: "files.log",
       time: "18m ago",
-      description: "Malware download URL"
+      description: "Known malware file extracted"
     }
   ];
 
@@ -57,7 +57,7 @@ export const ThreatFeed = () => {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Shield className="w-5 h-5 text-warning" />
-          Threat Intelligence
+          Zeek Log Analysis
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
