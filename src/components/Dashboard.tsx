@@ -1,67 +1,47 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { 
-  Shield, 
-  AlertTriangle, 
-  Activity, 
-  Network, 
-  Eye, 
-  FileText,
-  Database,
-  Search,
-  Globe,
-  Clock,
-  TrendingUp
-} from "lucide-react";
+import { Shield, AlertTriangle, Activity, Network, Eye, FileText, Database, Search, Globe, Clock, TrendingUp } from "lucide-react";
 import { MetricsCard } from "./MetricsCard";
 import { AlertsPanel } from "./AlertsPanel";
 import { NetworkFlow } from "./NetworkFlow";
 import { ThreatFeed } from "./ThreatFeed";
 import { RecentEvents } from "./RecentEvents";
-
 export const Dashboard = () => {
-  const metrics = [
-    {
-      title: "PCAP Files",
-      value: "1,247",
-      change: "+23",
-      trend: "up" as const,
-      icon: FileText,
-      color: "info" as const
-    },
-    {
-      title: "Suricata Alerts",
-      value: "89",
-      change: "+12",
-      trend: "up" as const, 
-      icon: AlertTriangle,
-      color: "critical" as const
-    },
-    {
-      title: "Zeek Logs",
-      value: "2.4M",
-      change: "+18%",
-      trend: "up" as const,
-      icon: Database,
-      color: "success" as const
-    },
-    {
-      title: "Arkime Sessions",
-      value: "156K",
-      change: "+7%",
-      trend: "up" as const,
-      icon: Eye,
-      color: "warning" as const
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background p-6 space-y-6">
+  const metrics = [{
+    title: "PCAP Files",
+    value: "1,247",
+    change: "+23",
+    trend: "up" as const,
+    icon: FileText,
+    color: "info" as const
+  }, {
+    title: "Suricata Alerts",
+    value: "89",
+    change: "+12",
+    trend: "up" as const,
+    icon: AlertTriangle,
+    color: "critical" as const
+  }, {
+    title: "Zeek Logs",
+    value: "2.4M",
+    change: "+18%",
+    trend: "up" as const,
+    icon: Database,
+    color: "success" as const
+  }, {
+    title: "Arkime Sessions",
+    value: "156K",
+    change: "+7%",
+    trend: "up" as const,
+    icon: Eye,
+    color: "warning" as const
+  }];
+  return <div className="min-h-screen bg-background p-6 space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Malcolm Network Analysis Suite</h1>
+          <h1 className="text-3xl font-bold text-foreground">Thunderx Network Analysis Suite</h1>
           <p className="text-muted-foreground">PCAP • Zeek • Suricata • OpenSearch • Arkime</p>
         </div>
         <div className="flex items-center gap-4">
@@ -78,9 +58,7 @@ export const Dashboard = () => {
 
       {/* Metrics Row */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {metrics.map((metric, index) => (
-          <MetricsCard key={index} {...metric} />
-        ))}
+        {metrics.map((metric, index) => <MetricsCard key={index} {...metric} />)}
       </div>
 
       {/* Main Content Grid */}
@@ -109,22 +87,19 @@ export const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {["HTTP/HTTPS", "DNS", "SSH", "FTP", "SMTP"].map((protocol, index) => (
-                <div key={protocol} className="flex items-center justify-between">
+              {["HTTP/HTTPS", "DNS", "SSH", "FTP", "SMTP"].map((protocol, index) => <div key={protocol} className="flex items-center justify-between">
                   <span className="text-foreground">{protocol}</span>
                   <div className="flex items-center gap-2">
                     <div className="w-24 h-2 bg-muted rounded-full">
-                      <div 
-                        className="h-full bg-primary rounded-full"
-                        style={{ width: `${Math.max(80 - index * 15, 20)}%` }}
-                      />
+                      <div className="h-full bg-primary rounded-full" style={{
+                    width: `${Math.max(80 - index * 15, 20)}%`
+                  }} />
                     </div>
                     <span className="text-sm text-muted-foreground w-12 text-right">
                       {Math.max(80 - index * 15, 20)}%
                     </span>
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </CardContent>
         </Card>
@@ -158,6 +133,5 @@ export const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
