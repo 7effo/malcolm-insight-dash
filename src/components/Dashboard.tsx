@@ -1,12 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shield, AlertTriangle, Activity, Network, Eye, FileText, Database, Search, Globe, Clock, TrendingUp } from "lucide-react";
 import { MetricsCard } from "./MetricsCard";
 import { AlertsPanel } from "./AlertsPanel";
 import { NetworkFlow } from "./NetworkFlow";
 import { ThreatFeed } from "./ThreatFeed";
 import { RecentEvents } from "./RecentEvents";
+import { Investigation } from "./Investigation";
 export const Dashboard = () => {
   const metrics = [{
     title: "PCAP Files",
@@ -41,7 +43,7 @@ export const Dashboard = () => {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Thunderx Network Analysis Suite</h1>
+          <h1 className="text-3xl font-bold text-foreground">Malcolm Network Analysis Suite</h1>
           <p className="text-muted-foreground">PCAP • Zeek • Suricata • OpenSearch • Arkime</p>
         </div>
         <div className="flex items-center gap-4">
@@ -61,77 +63,91 @@ export const Dashboard = () => {
         {metrics.map((metric, index) => <MetricsCard key={index} {...metric} />)}
       </div>
 
-      {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column - Alerts & Network */}
-        <div className="lg:col-span-2 space-y-6">
-          <AlertsPanel />
-          <NetworkFlow />
-        </div>
+      {/* Main Tabs */}
+      <Tabs defaultValue="overview" className="space-y-6">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="overview">Overview</TabsTrigger>
+          <TabsTrigger value="investigation">Investigation</TabsTrigger>
+        </TabsList>
 
-        {/* Right Column - Threat Feed & Events */}
-        <div className="space-y-6">
-          <ThreatFeed />
-          <RecentEvents />
-        </div>
-      </div>
+        <TabsContent value="overview" className="space-y-6">
+          {/* Main Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Left Column - Alerts & Network */}
+            <div className="lg:col-span-2 space-y-6">
+              <AlertsPanel />
+              <NetworkFlow />
+            </div>
 
-      {/* Bottom Section - Additional Analytics */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className="border-border bg-card">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Network className="w-5 h-5 text-info" />
-              Protocol Distribution
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {["HTTP/HTTPS", "DNS", "SSH", "FTP", "SMTP"].map((protocol, index) => <div key={protocol} className="flex items-center justify-between">
-                  <span className="text-foreground">{protocol}</span>
-                  <div className="flex items-center gap-2">
-                    <div className="w-24 h-2 bg-muted rounded-full">
-                      <div className="h-full bg-primary rounded-full" style={{
-                    width: `${Math.max(80 - index * 15, 20)}%`
-                  }} />
-                    </div>
-                    <span className="text-sm text-muted-foreground w-12 text-right">
-                      {Math.max(80 - index * 15, 20)}%
-                    </span>
+            {/* Right Column - Threat Feed & Events */}
+            <div className="space-y-6">
+              <ThreatFeed />
+              <RecentEvents />
+            </div>
+          </div>
+
+          {/* Bottom Section - Additional Analytics */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <Card className="border-border bg-card">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Network className="w-5 h-5 text-info" />
+                  Protocol Distribution
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {["HTTP/HTTPS", "DNS", "SSH", "FTP", "SMTP"].map((protocol, index) => <div key={protocol} className="flex items-center justify-between">
+                      <span className="text-foreground">{protocol}</span>
+                      <div className="flex items-center gap-2">
+                        <div className="w-24 h-2 bg-muted rounded-full">
+                          <div className="h-full bg-primary rounded-full" style={{
+                        width: `${Math.max(80 - index * 15, 20)}%`
+                      }} />
+                        </div>
+                        <span className="text-sm text-muted-foreground w-12 text-right">
+                          {Math.max(80 - index * 15, 20)}%
+                        </span>
+                      </div>
+                    </div>)}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border bg-card">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Database className="w-5 h-5 text-success" />
+                  Malcolm Components
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex justify-between items-center">
+                    <span className="text-foreground">OpenSearch</span>
+                    <span className="text-success">Running</span>
                   </div>
-                </div>)}
-            </div>
-          </CardContent>
-        </Card>
+                  <div className="flex justify-between items-center">
+                    <span className="text-foreground">Arkime</span>
+                    <span className="text-success">Running</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-foreground">Zeek Parser</span>
+                    <span className="text-success">Active</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-foreground">Suricata Engine</span>
+                    <span className="text-warning">Updating</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TabsContent>
 
-        <Card className="border-border bg-card">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Database className="w-5 h-5 text-success" />
-              Malcolm Components
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center">
-                <span className="text-foreground">OpenSearch</span>
-                <span className="text-success">Running</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-foreground">Arkime</span>
-                <span className="text-success">Running</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-foreground">Zeek Parser</span>
-                <span className="text-success">Active</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-foreground">Suricata Engine</span>
-                <span className="text-warning">Updating</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+        <TabsContent value="investigation">
+          <Investigation />
+        </TabsContent>
+      </Tabs>
     </div>;
 };
