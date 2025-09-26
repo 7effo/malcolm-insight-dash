@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Search, Filter, Download, Eye, AlertCircle, Clock, MapPin, FileText } from "lucide-react";
+import ThreatMap from "./ThreatMap";
+import { IOCPanel } from "./IOCPanel";
 
 export const Investigation = () => {
   const searchResults = [
@@ -97,6 +99,42 @@ export const Investigation = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Threat Map and IOCs */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <ThreatMap />
+        <Card className="border-border bg-card">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <MapPin className="w-5 h-5 text-success" />
+              Threat Intelligence
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center p-4 border border-border rounded-lg">
+                <div className="text-2xl font-bold text-critical">127</div>
+                <div className="text-sm text-muted-foreground">Active IOCs</div>
+              </div>
+              <div className="text-center p-4 border border-border rounded-lg">
+                <div className="text-2xl font-bold text-warning">23</div>
+                <div className="text-sm text-muted-foreground">Countries</div>
+              </div>
+              <div className="text-center p-4 border border-border rounded-lg">
+                <div className="text-2xl font-bold text-info">1,456</div>
+                <div className="text-sm text-muted-foreground">Blocked IPs</div>
+              </div>
+              <div className="text-center p-4 border border-border rounded-lg">
+                <div className="text-2xl font-bold text-success">98.7%</div>
+                <div className="text-sm text-muted-foreground">Detection Rate</div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* IOCs Panel */}
+      <IOCPanel />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Results */}
