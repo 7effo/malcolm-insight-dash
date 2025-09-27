@@ -9,6 +9,7 @@ import { NetworkFlow } from "./NetworkFlow";
 import { ThreatFeed } from "./ThreatFeed";
 import { RecentEvents } from "./RecentEvents";
 import { Investigation } from "./Investigation";
+import { ThreatHunting } from "./ThreatHunting";
 export const Dashboard = () => {
   const metrics = [{
     title: "PCAP Files",
@@ -65,9 +66,10 @@ export const Dashboard = () => {
 
       {/* Main Tabs */}
       <Tabs defaultValue="overview" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="investigation">Investigation</TabsTrigger>
+          <TabsTrigger value="hunting">Threat Hunting</TabsTrigger>
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
@@ -147,6 +149,10 @@ export const Dashboard = () => {
 
         <TabsContent value="investigation">
           <Investigation />
+        </TabsContent>
+
+        <TabsContent value="hunting">
+          <ThreatHunting />
         </TabsContent>
       </Tabs>
     </div>;
